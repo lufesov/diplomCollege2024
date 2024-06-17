@@ -1,0 +1,487 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SpectrModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocNumber" Type="nvarchar" MaxLength="19" Nullable="false" />
+          <Property Name="CustomerFirstName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CustomerSecondName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CustomerPatronymic" Type="varchar" MaxLength="100" />
+          <Property Name="PhoneNumber" Type="char" MaxLength="11" Nullable="false" />
+          <Property Name="EmailAdress" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Employer">
+          <Key>
+            <PropertyRef Name="EmployerID" />
+          </Key>
+          <Property Name="EmployerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmFirstName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmSecondName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PhoneNumber" Type="char" MaxLength="11" Nullable="false" />
+          <Property Name="Salary" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="PositionID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployerPosition">
+          <Key>
+            <PropertyRef Name="PositionID" />
+          </Key>
+          <Property Name="PositionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PositionName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Realty">
+          <Key>
+            <PropertyRef Name="RealtyID" />
+          </Key>
+          <Property Name="RealtyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Floors" Type="int" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Company" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rooms" Type="int" Nullable="false" />
+          <Property Name="MYear" Type="int" />
+        </EntityType>
+        <EntityType Name="Repair">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateStart" Type="date" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="DeviceID" Type="int" Nullable="false" />
+          <Property Name="EmployerID" Type="int" Nullable="false" />
+          <Property Name="PlainDateEnd" Type="date" Nullable="false" />
+          <Property Name="DateEnd" Type="date" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="Discount" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="TotalCost" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="RepairCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RepairCategoryJunction">
+          <Key>
+            <PropertyRef Name="JunctionID" />
+          </Key>
+          <Property Name="JunctionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Employer__Positi__4BAC3F29">
+          <End Role="EmployerPosition" Type="Self.EmployerPosition" Multiplicity="1" />
+          <End Role="Employer" Type="Self.Employer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployerPosition">
+              <PropertyRef Name="PositionID" />
+            </Principal>
+            <Dependent Role="Employer">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Repair__Customer__571DF1D5">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Repair" Type="Self.Repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Repair">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Repair__DeviceID__59063A47">
+          <End Role="Realty" Type="Self.Realty" Multiplicity="1" />
+          <End Role="Repair" Type="Self.Repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Realty">
+              <PropertyRef Name="RealtyID" />
+            </Principal>
+            <Dependent Role="Repair">
+              <PropertyRef Name="DeviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Repair__Employer__5812160E">
+          <End Role="Employer" Type="Self.Employer" Multiplicity="1" />
+          <End Role="Repair" Type="Self.Repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employer">
+              <PropertyRef Name="EmployerID" />
+            </Principal>
+            <Dependent Role="Repair">
+              <PropertyRef Name="EmployerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RepairCat__Categ__5CD6CB2B">
+          <End Role="RepairCategory" Type="Self.RepairCategory" Multiplicity="1" />
+          <End Role="RepairCategoryJunction" Type="Self.RepairCategoryJunction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RepairCategory">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="RepairCategoryJunction">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RepairCat__Order__5BE2A6F2">
+          <End Role="Repair" Type="Self.Repair" Multiplicity="1" />
+          <End Role="RepairCategoryJunction" Type="Self.RepairCategoryJunction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Repair">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="RepairCategoryJunction">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SpectrModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employer" EntityType="Self.Employer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployerPosition" EntityType="Self.EmployerPosition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Realty" EntityType="Self.Realty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Repair" EntityType="Self.Repair" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RepairCategory" EntityType="Self.RepairCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RepairCategoryJunction" EntityType="Self.RepairCategoryJunction" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Employer__Positi__4BAC3F29" Association="Self.FK__Employer__Positi__4BAC3F29">
+            <End Role="EmployerPosition" EntitySet="EmployerPosition" />
+            <End Role="Employer" EntitySet="Employer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Repair__Customer__571DF1D5" Association="Self.FK__Repair__Customer__571DF1D5">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Repair" EntitySet="Repair" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Repair__DeviceID__59063A47" Association="Self.FK__Repair__DeviceID__59063A47">
+            <End Role="Realty" EntitySet="Realty" />
+            <End Role="Repair" EntitySet="Repair" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Repair__Employer__5812160E" Association="Self.FK__Repair__Employer__5812160E">
+            <End Role="Employer" EntitySet="Employer" />
+            <End Role="Repair" EntitySet="Repair" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RepairCat__Categ__5CD6CB2B" Association="Self.FK__RepairCat__Categ__5CD6CB2B">
+            <End Role="RepairCategory" EntitySet="RepairCategory" />
+            <End Role="RepairCategoryJunction" EntitySet="RepairCategoryJunction" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RepairCat__Order__5BE2A6F2" Association="Self.FK__RepairCat__Order__5BE2A6F2">
+            <End Role="Repair" EntitySet="Repair" />
+            <End Role="RepairCategoryJunction" EntitySet="RepairCategoryJunction" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SpectrModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocNumber" Type="String" MaxLength="19" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustomerFirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerSecondName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerPatronymic" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="EmailAdress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Repair" Relationship="Self.FK__Repair__Customer__571DF1D5" FromRole="Customer" ToRole="Repair" />
+        </EntityType>
+        <EntityType Name="Employer">
+          <Key>
+            <PropertyRef Name="EmployerID" />
+          </Key>
+          <Property Name="EmployerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmFirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmSecondName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Salary" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="PositionID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EmployerPosition" Relationship="Self.FK__Employer__Positi__4BAC3F29" FromRole="Employer" ToRole="EmployerPosition" />
+          <NavigationProperty Name="Repair" Relationship="Self.FK__Repair__Employer__5812160E" FromRole="Employer" ToRole="Repair" />
+        </EntityType>
+        <EntityType Name="EmployerPosition">
+          <Key>
+            <PropertyRef Name="PositionID" />
+          </Key>
+          <Property Name="PositionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PositionName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Employer" Relationship="Self.FK__Employer__Positi__4BAC3F29" FromRole="EmployerPosition" ToRole="Employer" />
+        </EntityType>
+        <EntityType Name="Realty">
+          <Key>
+            <PropertyRef Name="RealtyID" />
+          </Key>
+          <Property Name="RealtyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Floors" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rooms" Type="Int32" Nullable="false" />
+          <Property Name="MYear" Type="Int32" />
+          <NavigationProperty Name="Repair" Relationship="Self.FK__Repair__DeviceID__59063A47" FromRole="Realty" ToRole="Repair" />
+        </EntityType>
+        <EntityType Name="Repair">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="DeviceID" Type="Int32" Nullable="false" />
+          <Property Name="EmployerID" Type="Int32" Nullable="false" />
+          <Property Name="PlainDateEnd" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateEnd" Type="DateTime" Precision="0" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="Discount" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="TotalCost" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Repair__Customer__571DF1D5" FromRole="Repair" ToRole="Customer" />
+          <NavigationProperty Name="Employer" Relationship="Self.FK__Repair__Employer__5812160E" FromRole="Repair" ToRole="Employer" />
+          <NavigationProperty Name="Realty" Relationship="Self.FK__Repair__DeviceID__59063A47" FromRole="Repair" ToRole="Realty" />
+          <NavigationProperty Name="RepairCategoryJunction" Relationship="Self.FK__RepairCat__Order__5BE2A6F2" FromRole="Repair" ToRole="RepairCategoryJunction" />
+        </EntityType>
+        <EntityType Name="RepairCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="RepairCategoryJunction" Relationship="Self.FK__RepairCat__Categ__5CD6CB2B" FromRole="RepairCategory" ToRole="RepairCategoryJunction" />
+        </EntityType>
+        <EntityType Name="RepairCategoryJunction">
+          <Key>
+            <PropertyRef Name="JunctionID" />
+          </Key>
+          <Property Name="JunctionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Repair" Relationship="Self.FK__RepairCat__Order__5BE2A6F2" FromRole="RepairCategoryJunction" ToRole="Repair" />
+          <NavigationProperty Name="RepairCategory" Relationship="Self.FK__RepairCat__Categ__5CD6CB2B" FromRole="RepairCategoryJunction" ToRole="RepairCategory" />
+        </EntityType>
+        <Association Name="FK__Repair__Customer__571DF1D5">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Repair" Type="Self.Repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Repair">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employer__Positi__4BAC3F29">
+          <End Role="EmployerPosition" Type="Self.EmployerPosition" Multiplicity="1" />
+          <End Role="Employer" Type="Self.Employer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployerPosition">
+              <PropertyRef Name="PositionID" />
+            </Principal>
+            <Dependent Role="Employer">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Repair__Employer__5812160E">
+          <End Role="Employer" Type="Self.Employer" Multiplicity="1" />
+          <End Role="Repair" Type="Self.Repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employer">
+              <PropertyRef Name="EmployerID" />
+            </Principal>
+            <Dependent Role="Repair">
+              <PropertyRef Name="EmployerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Repair__DeviceID__59063A47">
+          <End Role="Realty" Type="Self.Realty" Multiplicity="1" />
+          <End Role="Repair" Type="Self.Repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Realty">
+              <PropertyRef Name="RealtyID" />
+            </Principal>
+            <Dependent Role="Repair">
+              <PropertyRef Name="DeviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RepairCat__Order__5BE2A6F2">
+          <End Role="Repair" Type="Self.Repair" Multiplicity="1" />
+          <End Role="RepairCategoryJunction" Type="Self.RepairCategoryJunction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Repair">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="RepairCategoryJunction">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RepairCat__Categ__5CD6CB2B">
+          <End Role="RepairCategory" Type="Self.RepairCategory" Multiplicity="1" />
+          <End Role="RepairCategoryJunction" Type="Self.RepairCategoryJunction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RepairCategory">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="RepairCategoryJunction">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SpectrEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customer" EntityType="Self.Customer" />
+          <EntitySet Name="Employer" EntityType="Self.Employer" />
+          <EntitySet Name="EmployerPosition" EntityType="Self.EmployerPosition" />
+          <EntitySet Name="Realty" EntityType="Self.Realty" />
+          <EntitySet Name="Repair" EntityType="Self.Repair" />
+          <EntitySet Name="RepairCategory" EntityType="Self.RepairCategory" />
+          <EntitySet Name="RepairCategoryJunction" EntityType="Self.RepairCategoryJunction" />
+          <AssociationSet Name="FK__Repair__Customer__571DF1D5" Association="Self.FK__Repair__Customer__571DF1D5">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Repair" EntitySet="Repair" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employer__Positi__4BAC3F29" Association="Self.FK__Employer__Positi__4BAC3F29">
+            <End Role="EmployerPosition" EntitySet="EmployerPosition" />
+            <End Role="Employer" EntitySet="Employer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Repair__Employer__5812160E" Association="Self.FK__Repair__Employer__5812160E">
+            <End Role="Employer" EntitySet="Employer" />
+            <End Role="Repair" EntitySet="Repair" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Repair__DeviceID__59063A47" Association="Self.FK__Repair__DeviceID__59063A47">
+            <End Role="Realty" EntitySet="Realty" />
+            <End Role="Repair" EntitySet="Repair" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RepairCat__Order__5BE2A6F2" Association="Self.FK__RepairCat__Order__5BE2A6F2">
+            <End Role="Repair" EntitySet="Repair" />
+            <End Role="RepairCategoryJunction" EntitySet="RepairCategoryJunction" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RepairCat__Categ__5CD6CB2B" Association="Self.FK__RepairCat__Categ__5CD6CB2B">
+            <End Role="RepairCategory" EntitySet="RepairCategory" />
+            <End Role="RepairCategoryJunction" EntitySet="RepairCategoryJunction" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SpectrModelStoreContainer" CdmEntityContainer="SpectrEntities">
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="SpectrModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="DocNumber" ColumnName="DocNumber" />
+                <ScalarProperty Name="CustomerFirstName" ColumnName="CustomerFirstName" />
+                <ScalarProperty Name="CustomerSecondName" ColumnName="CustomerSecondName" />
+                <ScalarProperty Name="CustomerPatronymic" ColumnName="CustomerPatronymic" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="EmailAdress" ColumnName="EmailAdress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employer">
+            <EntityTypeMapping TypeName="SpectrModel.Employer">
+              <MappingFragment StoreEntitySet="Employer">
+                <ScalarProperty Name="EmployerID" ColumnName="EmployerID" />
+                <ScalarProperty Name="EmFirstName" ColumnName="EmFirstName" />
+                <ScalarProperty Name="EmSecondName" ColumnName="EmSecondName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployerPosition">
+            <EntityTypeMapping TypeName="SpectrModel.EmployerPosition">
+              <MappingFragment StoreEntitySet="EmployerPosition">
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Realty">
+            <EntityTypeMapping TypeName="SpectrModel.Realty">
+              <MappingFragment StoreEntitySet="Realty">
+                <ScalarProperty Name="RealtyID" ColumnName="RealtyID" />
+                <ScalarProperty Name="Floors" ColumnName="Floors" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Rooms" ColumnName="Rooms" />
+                <ScalarProperty Name="MYear" ColumnName="MYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Repair">
+            <EntityTypeMapping TypeName="SpectrModel.Repair">
+              <MappingFragment StoreEntitySet="Repair">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="EmployerID" ColumnName="EmployerID" />
+                <ScalarProperty Name="PlainDateEnd" ColumnName="PlainDateEnd" />
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RepairCategory">
+            <EntityTypeMapping TypeName="SpectrModel.RepairCategory">
+              <MappingFragment StoreEntitySet="RepairCategory">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RepairCategoryJunction">
+            <EntityTypeMapping TypeName="SpectrModel.RepairCategoryJunction">
+              <MappingFragment StoreEntitySet="RepairCategoryJunction">
+                <ScalarProperty Name="JunctionID" ColumnName="JunctionID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

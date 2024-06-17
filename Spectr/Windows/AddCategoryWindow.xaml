@@ -1,0 +1,35 @@
+﻿<Window x:Class="Spectr.Windows.AddCategoryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Spectr.Windows"
+        mc:Ignorable="d"
+        Title="AddCategoryWindow" Height="300" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="0" 
+            Name="CategoriesDataGrid"
+            Grid.ColumnSpan="3" 
+            Margin="10,10,10,10"
+            MinHeight="200"  
+            MaxHeight="1000" 
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            AutoGenerateColumns="False"
+            SelectionMode="Single" 
+            CanUserAddRows="False" 
+            IsReadOnly="True" 
+            SelectionUnit="FullRow">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding CategoryID}" Width="Auto"/>
+                <DataGridTextColumn Header="Название" Binding="{Binding Category}" Width="Auto"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Row="1" Content="Добавить" FontSize="15" Margin="10" Click="Add"></Button>
+    </Grid>
+</Window>

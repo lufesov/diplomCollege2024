@@ -1,0 +1,493 @@
+﻿<Window x:Class="Spectr.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Spectr"
+        mc:Ignorable="d" MinWidth="1200" MinHeight="600" Height="600" Width="1200" 
+        WindowStartupLocation="CenterScreen" WindowStyle="None" MouseDown="WindowMoving" Foreground="White">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0"/>
+    </WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <!-- Датагрид -->
+            <Style x:Key="DataGridRowStyle" TargetType="DataGridRow">
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Height" Value="6"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <!-- Табуляция (подчеркивания)  -->
+            <Style x:Key="TabItemStyle1" TargetType="{x:Type TabItem}">
+                <Setter Property="Height" Value="50"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="Background" Value="#FF8F8E8E"/>
+                <Setter Property="Foreground" Value="#FF2196F3"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="FontSize" Value="17"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="TabItem">
+                            <Border x:Name="Border" BorderThickness="0,1,1,0" CornerRadius="5,5,0,0" BorderBrush="Gainsboro">
+                                <ContentPresenter x:Name="ContentSite" HorizontalAlignment="Center" VerticalAlignment="Center" ContentSource="Header"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="#FF2196F3"/>
+                                    <Setter Property="BorderBrush" TargetName="Border" Value="#FF2196F3"/>
+                                    <Setter Property="BorderThickness" TargetName="Border" Value="1,1,1,3"/>
+                                    <Setter TargetName="Border" Property="Background" Value="#FFA4A4A4"/>
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="False">
+                                    <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="#FF2196F3"/>
+                                    <Setter Property="BorderBrush" TargetName="Border" Value="Gainsboro"/>
+                                    <Setter Property="BorderThickness" TargetName="Border" Value="1,1,1,0"/>
+                                    <Setter TargetName="Border" Property="Background" Value="#FFCFCECE" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!-- -->
+            <ControlTemplate x:Key="TextBoxErrorTemplate">
+                <DockPanel>
+                    <Border BorderBrush="Red" BorderThickness="1" Margin="2">
+                        <AdornedElementPlaceholder x:Name="adorner"/>
+                    </Border>
+                    <TextBlock Text="!" Foreground="Red" FontWeight="Bold" FontSize="12" Margin="2"/>
+                </DockPanel>
+            </ControlTemplate>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <DockPanel LastChildFill="True" Background="Gainsboro">
+        <!-- Хедер -->
+        <Grid  Height="40" DockPanel.Dock="Top"  VerticalAlignment="Top" Background="Gainsboro">
+            <Grid HorizontalAlignment="Stretch"  Background="Gainsboro">
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" Content="Сто ключей" Foreground="#FF969696" Width="250" FontSize="15" FontWeight="Bold" MouseDown="WindowMoving" VerticalAlignment="Center" HorizontalAlignment="Left" Cursor="Hand" />
+            </Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"  Width="350" Background="Gainsboro">
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" Content="FAQ"  Foreground="#FFA2A2A2" FontSize="15" FontWeight="Bold" VerticalAlignment="Center"/>
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" Content="CONTACT" Foreground="#FFA2A2A2" FontSize="15" FontWeight="Bold" VerticalAlignment="Center"/>
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" Content="MY ACCOUNT" Foreground="#FFA2A2A2" FontSize="15" FontWeight="Bold" VerticalAlignment="Center"/>
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" Click="Shutdown" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Cursor="Hand">
+                    <materialDesign:PackIcon Kind="Power" Height="25" Width="25" Foreground="#FFA2A2A2"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <!-- Низ -->
+        <Grid HorizontalAlignment="left" DockPanel.Dock="Bottom">
+            <StatusBar Height="20"  Margin="10 10" Background="Gainsboro">
+                <TextBlock Text="DONE" Background="{x:Null}" Foreground="#FFA2A2A2" FontSize="15" FontWeight="Bold" VerticalAlignment="Center" Cursor="Hand"/>
+            </StatusBar>
+        </Grid>
+
+        <!-- Центр -->
+        <Grid Margin="10 0" Background="#FFCFCECE">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TabControl>
+
+                <!-- #region 1. Вкладка Клиент -->
+                <TabItem Uid="0" Header="Клиенты" Style="{StaticResource TabItemStyle1}" Cursor="Hand" >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <DataGrid x:Name="CustomerDataGrid" 
+                                  AutoGenerateColumns="False" 
+                                  HorizontalAlignment="Stretch" 
+                                  VerticalAlignment="Stretch" 
+                                  Margin="0 5" Grid.Column="0"
+                                  SelectionMode="Single" 
+                                  CanUserAddRows="False" 
+                                  SelectedItem="{Binding SelectedClient}"
+                                  IsReadOnly="True" 
+                                  SelectionUnit="FullRow"
+                                  ItemsSource="{Binding Customers}"
+                                  SelectionChanged="CustomerDataGrid_SelectionChanged">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding CustomerID}" Width="50"/>
+                                <DataGridTextColumn Header="Паспорт" Binding="{Binding DocNumber}" Width="120"/>
+                                <DataGridTextColumn Header="Имя" Binding="{Binding CustomerFirstName}"/>
+                                <DataGridTextColumn Header="Фамилия" Binding="{Binding CustomerSecondName}"/>
+                                <DataGridTextColumn Header="Отчество" Binding="{Binding CustomerPatronymic}" />
+                                <DataGridTextColumn Header="Телефон" Binding="{Binding PhoneNumber}"/>
+                                <DataGridTextColumn Header="Email" Binding="{Binding EmailAdress}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <!-- Панель управления Клиента  -->
+                        <Border Grid.Column="1" BorderThickness="1" Height="400" Width="300" HorizontalAlignment="Left" Margin="40, 0" CornerRadius="3" BorderBrush="Blue">
+                            <StackPanel>
+                                <!-- Колонка с insert -->
+                                <Expander Header="Добавить клиента" Background="#FFCFCECE" Foreground="#FF2196F3" FontSize="17">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Row="0" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Документ"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="1" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Имя"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="2" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Фамилия"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="3" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Отчество"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="4" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Номер"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="5" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Email"/><Run Text=":"/></TextBlock>
+
+                                        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" BorderBrush="#000080" Name="tbClientAddDocNumber" Text="{Binding AddClient.DocNumber}"></TextBox>
+                                        <TextBox Grid.Row="1" Grid.Column="1" Margin="5" BorderBrush="#000080" Name="tbClientAddFirstName" Text="{Binding AddClient.CustomerFirstName}"></TextBox>
+                                        <TextBox Grid.Row="2" Grid.Column="1" Margin="5" BorderBrush="#000080" Name="tbClientAddSecondName" Text="{Binding AddClient.CustomerSecondName}"></TextBox>
+                                        <TextBox Grid.Row="3" Grid.Column="1" Margin="5" BorderBrush="#000080" Name="tbClientAddPatronymic" Text="{Binding AddClient.CustomerPatronymic}"></TextBox>
+                                        <TextBox Grid.Row="4" Grid.Column="1" Margin="5" BorderBrush="#000080" Name="tbClientAddPhoneNumber" Text="{Binding AddClient.PhoneNumber}"></TextBox>
+                                        <TextBox Grid.Row="5" Grid.Column="1" Margin="5" BorderBrush="#000080" Name="tbClientAddEmail" Text="{Binding EmailAdress}"></TextBox>
+                                        <Button  Grid.Row="6" Grid.Column="0" Content="Добавить" FontSize="16" Cursor="Hand" Margin="10" Click="CreateClientEvent"/>
+                                        <Button  Grid.Row="6" Grid.Column="1" Content="Отмена" FontSize="16" Cursor="Hand" Margin="10" Click="ClearAddClientInfo"/>
+                                    </Grid>
+                                </Expander>
+                                <!-- Колонка с update -->
+                                <Expander Header="Изменить клиента" Background="#FFCFCECE" Foreground="#FF2196F3" FontSize="17" >
+                                    <Grid DataContext="{Binding ElementName=CustomerDataGrid, Path=SelectedItem}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Row="0" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Документ"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="1" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Имя"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="2" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Фамилия"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="3" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Отчество"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="4" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Номер"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="5" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Email"/><Run Text=":"/></TextBlock>
+
+                                        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" BorderBrush="#000080" Name="tbClientUpdateDocNumber" Text="{Binding DocNumber}"></TextBox>
+                                        <TextBox Grid.Row="1" Grid.Column="1" Margin="5" BorderBrush="#000080" Name="tbClientUpdateFirstName" Text="{Binding CustomerFirstName}"></TextBox>
+                                        <TextBox Grid.Row="2" Grid.Column="1" Margin="5" BorderBrush="#000080" Name="tbClientUpdateSecondName" Text="{Binding CustomerSecondName}"></TextBox>
+                                        <TextBox Grid.Row="3" Grid.Column="1" Margin="5" BorderBrush="#000080" Name="tbClientUpdatePatronymic" Text="{Binding CustomerPatronymic}"></TextBox>
+                                        <TextBox Grid.Row="4" Grid.Column="1" Margin="5" BorderBrush="#000080" Name="tbClientUpdatePhoneNumber" Text="{Binding PhoneNumber}"></TextBox>
+                                        <TextBox Grid.Row="5" Grid.Column="1" Margin="5" BorderBrush="#000080" Name="tbClientUpdateEmail" Text="{Binding EmailAdress}"></TextBox>
+
+                                        <Button  Grid.Row="6" Grid.Column="0" Margin="10" Content="Изменить" FontSize="16" Cursor="Hand" Click="UpdateClientEvent"/>
+                                        <Button  Grid.Row="6" Grid.Column="1" Margin="10" Content="Отмена" FontSize="16" Cursor="Hand" Click="ClearUpdateClientInfo"/>
+                                    </Grid>
+                                </Expander>
+                                <!-- Колонка с delete -->
+                                <Button Content="Удалить клиента" FontSize="16" Cursor="Hand" Click="DeleteClient" Margin="5"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </TabItem>
+
+                <!-- #region 2. Вкладка Недвиж -->
+                <TabItem Uid="1" Header="Недвижимость" Style="{StaticResource TabItemStyle1}" Cursor="Hand">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <DataGrid x:Name="RealtyDataGrid" 
+                                  AutoGenerateColumns="False" 
+                                  Margin="0,5,0,5" Grid.Column="0" 
+                                  SelectionMode="Single" 
+                                  CanUserAddRows="False" 
+                                  IsReadOnly="True" 
+                                  SelectionUnit="FullRow"
+                                  SelectionChanged="RealtyDataGrid_SelectionChanged"
+                                  ItemsSource="{Binding Realties}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding RealtyID}" Width="50"/>
+                                <DataGridTextColumn Header="Этаж" Binding="{Binding Floors}" Width="120"/>
+                                <DataGridTextColumn Header="Тип" Binding="{Binding Type}"/>
+                                <DataGridTextColumn Header="Компания" Binding="{Binding Company}"/>
+                                <DataGridTextColumn Header="Комнаты" Binding="{Binding Rooms}" />
+                                <DataGridTextColumn Header="Год строительства" Binding="{Binding MYear}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <!-- Панель Недвиж -->
+                        <Border Grid.Column="1" BorderThickness="1" Height="400" Width="350" HorizontalAlignment="Left" Margin="40, 0" CornerRadius="3" BorderBrush="Blue">
+                            <StackPanel>
+                                <!-- Колонка с insert -->
+                                <Expander Header="Добавить недвижимость" Background="#FFCFCECE" Foreground="#FF2196F3" FontSize="17">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Row="0" Grid.Column="0" Margin="10, 10, 0, 0"><Run Language="ru-ru" Text="Этаж"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="1" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Тип"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="2" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Компания"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="3" Grid.Column="0" Margin="10, 10, 0, 0"><Run Language="ru-ru" Text="Кол-во комнат"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="4" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Год "/><Run Language="ru-ru" Text="строительства"/><Run Text=":"/></TextBlock>
+
+                                        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Name="tbRealtyAddFloor" BorderBrush="#000080"/>
+                                        <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Name="tbRealtyAddType" BorderBrush="#000080"/>
+                                        <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Name="tbRealtyAddCompany" BorderBrush="#000080"/>
+                                        <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Name="tbRealtyAddRooms" BorderBrush="#000080"/>
+                                        <TextBox Grid.Row="4" Grid.Column="1" Margin="5" Name="tbRealtyAddMYear" BorderBrush="#000080"/>
+
+                                        <Button  Grid.Row="5" Grid.Column="0" Content="Добавить" FontSize="16" Cursor="Hand" Margin="10" 
+                                                 Click="AddRealtyEvent"/>
+                                        <Button  Grid.Row="5" Grid.Column="1" Content="Отмена" FontSize="16" Cursor="Hand" Margin="10"
+                                                 Click="ClearAddRealtyInfo"/>
+                                    </Grid>
+                                </Expander>
+
+                                <!-- Колонка с update -->
+                                <Expander Header="Изменить недвижимость" Background="#FFCFCECE" Foreground="#FF2196F3" FontSize="17" >
+                                    <Grid DataContext="{Binding ElementName=RealtyDataGrid, Path=SelectedItem}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Row="0" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Этаж"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="1" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Тип"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="2" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Компания"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="3" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Кол-во комнат"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="4" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Год строительства"/><Run Text=":"/></TextBlock>
+
+                                        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Name="tbRealtyUpdateFloor" Text="{Binding Floors}" BorderBrush="#000080"/>
+                                        <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Name="tbRealtyUpdateType" Text="{Binding Type}" BorderBrush="#000080"/>
+                                        <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Name="tbRealtyUpdateCompany" Text="{Binding Company}" BorderBrush="#000080"/>
+                                        <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Name="tbRealtyUpdateRooms" Text="{Binding Rooms}" BorderBrush="#000080"/>
+                                        <TextBox Grid.Row="4" Grid.Column="1" Margin="5" Name="tbRealtyUpdateMYear" Text="{Binding MYear}" BorderBrush="#000080"/>
+
+                                        <Button  Grid.Row="5" Grid.Column="0" Margin="10" Content="Изменить" FontSize="16" Cursor="Hand" Click="UpdateRealtyEvent"/>
+                                        <Button  Grid.Row="5" Grid.Column="1" Margin="10" Content="Отмена" FontSize="16" Cursor="Hand" Click="ClearUpdateRealtyInfo"/>
+                                    </Grid>
+                                </Expander>
+                                
+                                <!-- Колонка с delete -->
+                                <Button Content="Удалить недвижимость" FontSize="16" Cursor="Hand" Margin="5" Click="DeleteRealtyEvent" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </TabItem>
+                <!-- #endregion -->
+
+                <!-- #region 3. Вкладка Сделки -->
+                <TabItem Uid="2" Header="Сделки" Style="{StaticResource TabItemStyle1}" Cursor="Hand">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <DataGrid x:Name="RepairOrderDataGrid" 
+                                  AutoGenerateColumns="false" 
+                                  Margin="0,5,0,5"  
+                                  SelectionMode="Single"
+                                  CanUserAddRows="False"
+                                  Grid.Row="0"
+                                  IsReadOnly="True"
+                                  SelectionUnit="FullRow"
+                                  SelectionChanged="RepairOrderDataGrid_SelectionChanged"
+                                  ItemsSource="{Binding Repaires}" Grid.ColumnSpan="2">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding OrderID}" Width="50"/>
+                                <DataGridTextColumn Header="Дата заказа" Binding="{Binding StartDateStr}" Width="120"/>
+                                <DataGridTextColumn Header="Дата окончания" Binding="{Binding EndDateStr}"/>
+                                <DataGridTextColumn Header="Цена" Binding="{Binding TotalCost}"/>
+                                <DataGridTextColumn Header="Заказчик" Binding="{Binding CustomerStr}" />
+                                <DataGridTextColumn Header="Работник" Binding="{Binding EmployerStr}"/>
+                                <DataGridTextColumn Header="Категории" Binding="{Binding CategoriesStr}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <!-- Панель упраления Заказ -->
+                        <Border Grid.Row="1" Height="50" Width="800" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0.5" CornerRadius="3"  BorderBrush="Blue" Grid.Column="1" Margin="10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0" Margin="10" Content="Добавить" Click="AddOrderEvent"></Button>
+                                <Button Grid.Column="1" Margin="10" Content="Изменить" Click="EditOrderEvent"></Button>
+                                <Button Grid.Column="2" Margin="10" Content="Удалить" Click="DeleteOrderEvent"></Button>
+                                <Button Grid.Column="3" Margin="10" Content="Экспорт списка" Click="ExportOrdersData"></Button>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </TabItem>
+                <!-- #endregion -->
+
+                <!-- #region 1. Вкладка Сотрудник -->
+                <TabItem Uid="0" Header="Служебное" Style="{StaticResource TabItemStyle1}" Cursor="Hand" >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <DataGrid x:Name="EmployersDataGrid" 
+                                  AutoGenerateColumns="False" 
+                                  HorizontalAlignment="Stretch" 
+                                  VerticalAlignment="Stretch" 
+                                  Margin="0 5" Grid.Column="0"
+                                  SelectionMode="Single" 
+                                  CanUserAddRows="False"
+                                  IsReadOnly="True" 
+                                  SelectionUnit="FullRow"
+                                  SelectionChanged="EmployersDataGrid_SelectionChanged">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding EmployerID}" Width="50"/>
+                                <DataGridTextColumn Header="Имя" Binding="{Binding EmFirstName}"/>
+                                <DataGridTextColumn Header="Фамилия" Binding="{Binding EmSecondName}"/>
+                                <DataGridTextColumn Header="Телефон" Binding="{Binding PhoneNumber}"/>
+                                <DataGridTextColumn Header="Зарплата" Binding="{Binding Salary}"/>
+                                <DataGridTextColumn Header="Должность" Binding="{Binding EmployerPosition.PositionName}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <!-- Панель управления Сотрудник  -->
+                        <Border Grid.Column="1" BorderThickness="1" Height="400" Width="300" HorizontalAlignment="Left" Margin="40, 0" CornerRadius="3" BorderBrush="Blue">
+                            <StackPanel>
+                                <!-- Колонка с insert -->
+                                <Expander Header="Добавить сотрудника" Background="#FFCFCECE" Foreground="#FF2196F3" FontSize="17">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Row="0" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Имя"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="1" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Фамилия"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="2" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Номер"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="3" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Зарплата"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="4" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Должность"/><Run Text=":"/></TextBlock>
+
+                                        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" BorderBrush="#000080" Name="tbEmployerAddFirstName"></TextBox>
+                                        <TextBox Grid.Row="1" Grid.Column="1" Margin="5" BorderBrush="#000080" Name="tbEmployerAddSecondName"></TextBox>
+                                        <TextBox Grid.Row="2" Grid.Column="1" Margin="5" BorderBrush="#000080" Name="tbEmployerAddPhoneNUmber" ></TextBox>
+                                        <TextBox Grid.Row="3" Grid.Column="1" Margin="5" BorderBrush="#000080" Name="tbEmployerAddSalary"></TextBox>
+                                        <ComboBox Grid.Row="4" Grid.Column="1" Margin="5" BorderBrush="#000080" Name="cbAddEmployerPositions">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding PositionName}"></TextBlock>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+
+                                        <Button  Grid.Row="6" Grid.Column="0" Content="Добавить" FontSize="16" Cursor="Hand" Margin="10" Click="AddEmployerEvent"/>
+                                        <Button  Grid.Row="6" Grid.Column="1" Content="Отмена" FontSize="16" Cursor="Hand" Margin="10" Click="ClearAddEmployerInfo"/>
+                                    </Grid>
+                                </Expander>
+                                <!-- Колонка с update -->
+                                <Expander Header="Изменить сотрудника" Background="#FFCFCECE" Foreground="#FF2196F3" FontSize="17" >
+                                    <Grid DataContext="{Binding ElementName=EmployersDataGrid, Path=SelectedItem}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Row="0" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Имя"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="1" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Фамилия"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="2" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Номер"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="3" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Зарплата"/><Run Text=":"/></TextBlock>
+                                        <TextBlock Grid.Row="4" Grid.Column="0" Margin="10, 10, 0, 0"><Run Text="Должность"/><Run Text=":"/></TextBlock>
+
+                                        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" BorderBrush="#000080" Name="tbEmployerUpdateFirstName" Text="{Binding EmFirstName}"></TextBox>
+                                        <TextBox Grid.Row="1" Grid.Column="1" Margin="5" BorderBrush="#000080" Name="tbEmployerUpdateSecondName" Text="{Binding EmSecondName}"></TextBox>
+                                        <TextBox Grid.Row="2" Grid.Column="1" Margin="5" BorderBrush="#000080" Name="tbEmployerUpdatePhoneNUmber" Text="{Binding PhoneNumber}"></TextBox>
+                                        <TextBox Grid.Row="3" Grid.Column="1" Margin="5" BorderBrush="#000080" Name="tbEmployerUpdateSalary" Text="{Binding Salary}"></TextBox>
+                                        <ComboBox Grid.Row="4" Grid.Column="1" Margin="5" BorderBrush="#000080" Name="cbUpdateEmployerPositions" SelectedItem="{Binding EmployerPosition}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding PositionName}"></TextBlock>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                        
+                                        <Button  Grid.Row="6" Grid.Column="0" Margin="10" Content="Изменить" FontSize="16" Cursor="Hand" Click="UpdateEmployerEvent"/>
+                                        <Button  Grid.Row="6" Grid.Column="1" Margin="10" Content="Отмена" FontSize="16" Cursor="Hand" Click="ClearUpdateEmployerInfo"/>
+                                    </Grid>
+                                </Expander>
+                                <!-- Колонка с delete -->
+                                <Button Content="Удалить сотрудника" FontSize="16" Cursor="Hand" Click="DeleteEmployerEvent" Margin="5"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </DockPanel>
+</Window>

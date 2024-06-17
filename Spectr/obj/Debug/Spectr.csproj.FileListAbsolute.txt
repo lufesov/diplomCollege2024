@@ -1,0 +1,86 @@
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\bin\Debug\Spectr.exe.config
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\bin\Debug\Spectr.exe
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\bin\Debug\Spectr.pdb
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\bin\Debug\ControlzEx.dll
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\bin\Debug\MahApps.Metro.dll
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\bin\Debug\MaterialDesignColors.dll
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\bin\Debug\MaterialDesignThemes.MahApps.dll
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\bin\Debug\Microsoft.Xaml.Behaviors.dll
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\bin\Debug\ControlzEx.pdb
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\bin\Debug\ControlzEx.xml
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\bin\Debug\MahApps.Metro.pdb
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\bin\Debug\MahApps.Metro.xml
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\bin\Debug\MaterialDesignColors.pdb
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\bin\Debug\MaterialDesignThemes.MahApps.pdb
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\bin\Debug\Microsoft.Xaml.Behaviors.xml
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\obj\Debug\Spectr.csproj.AssemblyReference.cache
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\obj\Debug\Spectr.csproj.SuggestedBindingRedirects.cache
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\obj\Debug\App.g.cs
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\obj\Debug\Spectr_MarkupCompile.cache
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\obj\Debug\Spectr_MarkupCompile.lref
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\obj\Debug\App.baml
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\obj\Debug\Spectr.g.resources
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\obj\Debug\Spectr.Properties.Resources.resources
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\obj\Debug\Spectr.csproj.GenerateResource.cache
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\obj\Debug\Spectr.csproj.CoreCompileInputs.cache
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\obj\Debug\Spectr.csproj.CopyComplete
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\obj\Debug\Spectr.exe
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\obj\Debug\Spectr.pdb
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\bin\Debug\EntityFramework.dll
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\bin\Debug\EntityFramework.xml
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\obj\Debug\Windows\MainWindow.g.cs
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\obj\Debug\Spectr_Content.g.cs
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\obj\Debug\Windows\MainWindow.baml
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\obj\Debug\Windows\EditOrderWindow.g.cs
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\obj\Debug\Windows\EditOrderWindow.baml
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\obj\Debug\Windows\AddCategoryWindow.g.cs
+C:\Users\Пользователь\source\repos\Spectr\Spectr\Spectr\obj\Debug\Windows\AddCategoryWindow.baml
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\bin\Debug\Spectr.exe.config
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\bin\Debug\Spectr.exe
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\bin\Debug\Spectr.pdb
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\bin\Debug\ControlzEx.dll
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\bin\Debug\EntityFramework.dll
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\bin\Debug\MahApps.Metro.dll
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\bin\Debug\MaterialDesignColors.dll
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\bin\Debug\MaterialDesignThemes.MahApps.dll
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\bin\Debug\Microsoft.Xaml.Behaviors.dll
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\bin\Debug\ControlzEx.pdb
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\bin\Debug\ControlzEx.xml
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\bin\Debug\EntityFramework.xml
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\bin\Debug\MahApps.Metro.pdb
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\bin\Debug\MahApps.Metro.xml
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\bin\Debug\MaterialDesignColors.pdb
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\bin\Debug\MaterialDesignThemes.MahApps.pdb
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\bin\Debug\Microsoft.Xaml.Behaviors.xml
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\obj\Debug\Spectr.csproj.AssemblyReference.cache
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\obj\Debug\Spectr.csproj.SuggestedBindingRedirects.cache
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\obj\Debug\Windows\AddCategoryWindow.g.cs
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\obj\Debug\Windows\EditOrderWindow.g.cs
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\obj\Debug\Windows\MainWindow.g.cs
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\obj\Debug\App.g.cs
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\obj\Debug\Spectr_Content.g.cs
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\obj\Debug\Spectr_MarkupCompile.cache
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\obj\Debug\Spectr_MarkupCompile.lref
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\obj\Debug\App.baml
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\obj\Debug\Windows\AddCategoryWindow.baml
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\obj\Debug\Windows\EditOrderWindow.baml
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\obj\Debug\Windows\MainWindow.baml
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\obj\Debug\Spectr.g.resources
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\obj\Debug\Spectr.Properties.Resources.resources
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\obj\Debug\Spectr.csproj.GenerateResource.cache
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\obj\Debug\Spectr.csproj.CoreCompileInputs.cache
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\obj\Debug\Spectr.csproj.CopyComplete
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\obj\Debug\Spectr.exe
+C:\Users\yulya\OneDrive\Рабочий стол\Spectr\Spectr\obj\Debug\Spectr.pdb

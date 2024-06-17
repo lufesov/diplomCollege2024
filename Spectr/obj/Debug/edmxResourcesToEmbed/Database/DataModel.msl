@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SpectrModelStoreContainer" CdmEntityContainer="SpectrEntities">
+    <EntitySetMapping Name="Customer">
+      <EntityTypeMapping TypeName="SpectrModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="DocNumber" ColumnName="DocNumber" />
+          <ScalarProperty Name="CustomerFirstName" ColumnName="CustomerFirstName" />
+          <ScalarProperty Name="CustomerSecondName" ColumnName="CustomerSecondName" />
+          <ScalarProperty Name="CustomerPatronymic" ColumnName="CustomerPatronymic" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="EmailAdress" ColumnName="EmailAdress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employer">
+      <EntityTypeMapping TypeName="SpectrModel.Employer">
+        <MappingFragment StoreEntitySet="Employer">
+          <ScalarProperty Name="EmployerID" ColumnName="EmployerID" />
+          <ScalarProperty Name="EmFirstName" ColumnName="EmFirstName" />
+          <ScalarProperty Name="EmSecondName" ColumnName="EmSecondName" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+          <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmployerPosition">
+      <EntityTypeMapping TypeName="SpectrModel.EmployerPosition">
+        <MappingFragment StoreEntitySet="EmployerPosition">
+          <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+          <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Realty">
+      <EntityTypeMapping TypeName="SpectrModel.Realty">
+        <MappingFragment StoreEntitySet="Realty">
+          <ScalarProperty Name="RealtyID" ColumnName="RealtyID" />
+          <ScalarProperty Name="Floors" ColumnName="Floors" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+          <ScalarProperty Name="Rooms" ColumnName="Rooms" />
+          <ScalarProperty Name="MYear" ColumnName="MYear" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Repair">
+      <EntityTypeMapping TypeName="SpectrModel.Repair">
+        <MappingFragment StoreEntitySet="Repair">
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+          <ScalarProperty Name="EmployerID" ColumnName="EmployerID" />
+          <ScalarProperty Name="PlainDateEnd" ColumnName="PlainDateEnd" />
+          <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepairCategory">
+      <EntityTypeMapping TypeName="SpectrModel.RepairCategory">
+        <MappingFragment StoreEntitySet="RepairCategory">
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepairCategoryJunction">
+      <EntityTypeMapping TypeName="SpectrModel.RepairCategoryJunction">
+        <MappingFragment StoreEntitySet="RepairCategoryJunction">
+          <ScalarProperty Name="JunctionID" ColumnName="JunctionID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="77191a1a29174f078815cf8d07858cce" Name="Diagram1">
+        <EntityTypeShape EntityType="SpectrModel.Customer" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpectrModel.Employer" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpectrModel.EmployerPosition" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpectrModel.Realty" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpectrModel.Repair" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpectrModel.RepairCategory" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpectrModel.RepairCategoryJunction" Width="1.5" PointX="7.5" PointY="2" IsExpanded="true" />
+        <AssociationConnector Association="SpectrModel.FK__Repair__Customer__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="SpectrModel.FK__Employer__Positi__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="SpectrModel.FK__Repair__Employer__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="SpectrModel.FK__Repair__DeviceID__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="SpectrModel.FK__RepairCat__Order__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="SpectrModel.FK__RepairCat__Categ__5CD6CB2B" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
